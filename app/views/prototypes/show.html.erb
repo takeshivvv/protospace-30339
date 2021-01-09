@@ -4,15 +4,18 @@
       <p class="prototype__hedding">
         <%= "プロトタイプのタイトル"%>
       </p>
-      <%= link_to "by プロトタイプの投稿者", root_path, class: :prototype__user %>
+      <%= link_to "byプロトタイプの投稿者名", prototype_path(@prototype.id), method: :get %>
       <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
+        <% if user_signed_in? && current_user.id == @prototype.user_id %>
         <div class="prototype__manage">
           <%= link_to "編集する", root_path, class: :prototype__btn %>
           <%= link_to "削除する", root_path, class: :prototype__btn %>
         </div>
+        <% end %>
       <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
+      <% if user_signed_in? && current_user.id == @prototype.user_id %>
       <div class="prototype__image">
-        <%= image_tag "プロトタイプの画像" %>
+        <%= image_tag @prototype.image %>
       </div>
       <div class="prototype__body">
         <div class="prototype__detail">
@@ -29,6 +32,7 @@
         </div>
       </div>
       <div class="prototype__comments">
+       <% end %>
         <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
           <%# <%= form_with local: true do |f|%>
             <div class="field">
