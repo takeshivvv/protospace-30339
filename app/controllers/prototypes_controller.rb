@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:edit, :show]
+  before_action :set_prototype, only: [:edit, :show, :update, :destroy]
 
   def index
     @prototypes = Prototype.all
@@ -14,10 +14,10 @@ end
   end
 
   def update
-    if current_user.update(prototypes_params)
-      redirect_to root_path
+    if @prototype.update(prototypes_params)
+       redirect_to prototype_path
     else
-      render :new
+       render :edit
     end
   end
 
@@ -25,6 +25,14 @@ end
   end
 
   def show
+  end
+
+  def destroy
+    if @prototype.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
 
