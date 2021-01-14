@@ -1,8 +1,11 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:edit, :show, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+
 
   def index
-    @prototypes = Prototype.all
+    @prototypes = Prototype.includes(:user)
 end
 
   def new
@@ -25,6 +28,8 @@ end
   end
 
   def show
+    @comment = Comment.new
+    @comments = @prototype.comments
   end
 
   def destroy
@@ -43,6 +48,10 @@ private
 
   def set_prototype
     @prototype = Prototype.find(params[:id])
+  end
+
+  def contributor_confirmation
+    redirect_to root_path unless current_user == @prototype.user
   end
 
 
