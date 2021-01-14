@@ -27,7 +27,7 @@
 ### Association
 
 - belongs_to :users
-- belongs_to : prototypes
+- belongs_to :prototypes
 
 ## prototypes テーブル
 
