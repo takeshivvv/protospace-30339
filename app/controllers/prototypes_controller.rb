@@ -13,7 +13,12 @@ end
   end
 
   def create
-    Prototype.create(prototypes_params)
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def update
