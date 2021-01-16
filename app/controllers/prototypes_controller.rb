@@ -13,7 +13,7 @@ end
   end
 
   def create
-    @prototype = Prototype.new(prototype_params)
+    @prototype = Prototype.new(prototypes_params)
     if @prototype.save
       redirect_to root_path
     else
